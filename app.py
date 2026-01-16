@@ -3,7 +3,7 @@ from langchain_community.document_loaders import PyPDFLoader
 from chain import ask_question
 from vector_embeddings import create_vector_store, load_vector_store
 from web_scraping import scrape_url, ScraperError
-from pdf_loader import semantic_spacy_chunking
+from pdf_loader import semantic_chunking
 from save_scrape_data import save_text_to_pdf
 # -----------------------------
 # Page Config
@@ -49,7 +49,7 @@ if st.button("Index Website"):
             
             loader = PyPDFLoader("web_scraping_article.pdf")
             docs = loader.load()
-            semantic_chunks = semantic_spacy_chunking(docs, max_chars=500)
+            semantic_chunks = semantic_chunking(docs, max_chars=500)
 
             create_vector_store(semantic_chunks)
 

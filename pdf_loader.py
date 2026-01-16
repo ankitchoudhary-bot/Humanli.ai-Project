@@ -1,35 +1,38 @@
-from langchain_community.document_loaders import PyPDFLoader
-import spacy
-from langchain_classic.schema import Document
 from langchain_core.documents import Document
+import re
 
-_nlp = None
-
-def get_nlp():
-    global _nlp
-    if _nlp is None:
-        _nlp = spacy.load("en_core_web_sm")
-    return _nlp
-
-def semantic_spacy_chunking(docs, max_chars=500):
-    nlp = get_nlp()
+def semantic_chunking(docs, max_chars=500):
+    """
+    Sentence-aware chunking without spaCy
+    """
     chunks = []
 
     for doc in docs:
-        spacy_doc = nlp(doc.page_content)
-        current = ""
+        sentences = re.split(r'(?<=[.!?])\s+', doc.page_content)
+        buffer = ""
 
-        for sent in spacy_doc.sents:
-            if len(current) + len(sent.text) <= max_chars:
-                current += " " + sent.text
+        for sent in sentences:
+            if len(buffer) + len(sent) <= max_chars:
+                buffer += " " + sent
             else:
-                chunks.append(Document(page_content=current.strip(), metadata=doc.metadata))
-                current = sent.text
+                chunks.append(
+                    Document(
+                        page_content=buffer.strip(),
+                        metadata=doc.metadata
+                    )
+                )
+                buffer = sent
 
-        if current.strip():
-            chunks.append(Document(page_content=current.strip(), metadata=doc.metadata))
+        if buffer.strip():
+            chunks.append(
+                Document(
+                    page_content=buffer.strip(),
+                    metadata=doc.metadata
+                )
+            )
 
     return chunks
+
 
 # if __name__ == "__main__":
 #     loader = PyPDFLoader("web_scraping_article.pdf")
