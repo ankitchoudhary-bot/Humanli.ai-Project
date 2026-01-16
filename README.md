@@ -118,7 +118,7 @@ Vector Store: FAISS
 
 # Setup and Run Instructions
 1. Clone the Repository
-git clone <your-repo-url>
+git clone https://github.com/ankitchoudhary-bot/Humanli.ai-Project.git
 cd Humanli.ai-Project
 
 2. Create and Activate Virtual Environment
@@ -179,7 +179,7 @@ Streamlit will provide a local or public URL where the chatbot UI is accessible.
 # Public Streamlit Application
 
 👉 Live Demo:
-https://your-app-name.streamlit.app
+https://humanliai-project-283u67svk9xmbjzifvrdyc.streamlit.app/
 
 # Final Notes
 
