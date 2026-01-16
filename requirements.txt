@@ -1,0 +1,11 @@
+streamlit
+langchain
+langchain-community
+langchain-huggingface
+sentence-transformers
+faiss-cpu
+transformers
+torch
+spacy
+beautifulsoup4
+requests
