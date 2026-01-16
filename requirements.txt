@@ -11,4 +11,6 @@ requests
 readability-lxml
 lxml
 torch
+reportlab
+
 
