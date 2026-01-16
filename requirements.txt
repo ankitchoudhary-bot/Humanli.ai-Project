@@ -12,5 +12,4 @@ readability-lxml
 lxml
 torch
 reportlab
-
-
+pypdf
